@@ -22,10 +22,12 @@ group :development, :test do
 end
 
 group :development do
-  gem "rubocop",               "~> 1.68.0", require: false
-  gem "rubocop-factory_bot",   "~> 2.26.1", require: false
-  gem "rubocop-performance",   "~> 1.22.1", require: false
-  gem "rubocop-rails",         "~> 2.27.0", require: false
-  gem "rubocop-rspec",         "~> 3.2.0",  require: false
-  gem "rubocop-rspec_rails",   "~> 2.30.0", require: false
+  gem "rubocop", "~> 1.68.0", require: false
+  gem "rubocop-factory_bot", "~> 2.26.1", require: false
+  gem "rubocop-performance", "~> 1.22.1", require: false
+  gem "rubocop-rails", "~> 2.27.0", require: false
+  gem "rubocop-rspec", "~> 3.2.0", require: false
+  gem "rubocop-rspec_rails", "~> 2.30.0", require: false
+  gem "spring", "~> 4.2.1"
+  gem "spring-commands-rspec"
 end
