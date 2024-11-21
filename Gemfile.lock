@@ -94,6 +94,8 @@ GEM
       irb (~> 1.10)
       reline (>= 0.3.8)
     diff-lcs (1.5.1)
+    discard (1.4.0)
+      activerecord (>= 4.2, < 9.0)
     drb (2.2.1)
     em-websocket (0.5.3)
       eventmachine (>= 0.12.9)
@@ -353,6 +355,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   debug
+  discard (~> 1.4.0)
   factory_bot_rails (~> 6.4.3)
   faker (~> 3.4.2)
   guard
