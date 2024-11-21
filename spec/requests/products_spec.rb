@@ -1,22 +1,24 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "/products", type: :request do
-  let(:valid_attributes) {
+RSpec.describe "Procucts" do
+  let(:valid_attributes) do
     {
       name: 'A product',
       price: 1
     }
-  }
+  end
 
-  let(:invalid_attributes) {
+  let(:invalid_attributes) do
     {
       price: -1
     }
-  }
+  end
 
-  let(:valid_headers) {
+  let(:valid_headers) do
     {}
-  }
+  end
 
   describe "GET /index" do
     it "renders a successful response" do
@@ -37,10 +39,10 @@ RSpec.describe "/products", type: :request do
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new Product" do
-        expect {
+        expect do
           post products_url,
                params: { product: valid_attributes }, headers: valid_headers, as: :json
-        }.to change(Product, :count).by(1)
+        end.to change(Product, :count).by(1)
       end
 
       it "renders a JSON response with the new product" do
@@ -53,10 +55,10 @@ RSpec.describe "/products", type: :request do
 
     context "with invalid parameters" do
       it "does not create a new Product" do
-        expect {
+        expect do
           post products_url,
                params: { product: invalid_attributes }, as: :json
-        }.to change(Product, :count).by(0)
+        end.not_to change(Product, :count)
       end
 
       it "renders a JSON response with errors for the new product" do
@@ -70,14 +72,7 @@ RSpec.describe "/products", type: :request do
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_name) { 'Another name' }
-      let(:new_price) { 2 }
-      let(:new_attributes) {
-        {
-          name: new_name,
-          price: new_price
-        }
-      }
+      let(:new_attributes) { { name: 'Another name', price: 2 } }
 
       it "updates the requested product" do
         product = Product.create! valid_attributes
@@ -111,9 +106,9 @@ RSpec.describe "/products", type: :request do
   describe "DELETE /destroy" do
     it "destroys the requested product" do
       product = Product.create! valid_attributes
-      expect {
+      expect do
         delete product_url(product), headers: valid_headers, as: :json
-      }.to change(Product, :count).by(-1)
+      end.to change(Product, :count).by(-1)
     end
   end
 end
