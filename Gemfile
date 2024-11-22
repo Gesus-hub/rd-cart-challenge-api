@@ -25,6 +25,10 @@ group :development, :test do
   gem "rspec-rails", "~> 6.1.0"
 end
 
+group :test do
+  gem "shoulda-matchers",      "~> 6.4.0", require: false
+end
+
 group :development do
   gem "rubocop", "~> 1.68.0", require: false
   gem "rubocop-factory_bot", "~> 2.26.1", require: false
