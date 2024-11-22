@@ -4,6 +4,7 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require 'rspec/rails'
+require 'shoulda/matchers'
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 
 Rails.root.glob('spec/support/**/*.rb').sort_by(&:to_s).each { |f| require f }
