@@ -19,9 +19,12 @@ gem "guard"
 gem "guard-livereload", require: false
 
 group :development, :test do
+  gem "database_cleaner", "~> 2.1.0"
   gem "debug", platforms: %i[mri windows]
   gem "factory_bot_rails", "~> 6.4.3"
   gem "faker", "~> 3.4.2"
+  gem "pry-byebug", "~> 3.10"
+  gem "pry-rails", "~> 0.3.11"
   gem "rspec-rails", "~> 6.1.0"
 end
 
