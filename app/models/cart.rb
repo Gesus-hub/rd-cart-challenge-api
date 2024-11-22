@@ -3,7 +3,8 @@
 class Cart < ApplicationRecord
   include Discard::Model
 
-  validates :total_price, numericality: { greater_than_or_equal_to: 0 }
+  has_many :cart_items, class_name: "Cart::Item", dependent: :destroy
+  has_many :products, through: :cart_items
 
-  # TODO: lógica para marcar o carrinho como abandonado e remover se abandonado
+  validates :total_price, numericality: { greater_than_or_equal_to: 0 }
 end
