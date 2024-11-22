@@ -9,11 +9,11 @@ default: &default
 
 development:
   <<: *default
-  database: rd_cat_challenge_development
+  database: rd_cart_challenge_development
 
 test:
   <<: *default
-  database: rd_cat_challenge_test
+  database: rd_cart_challenge_test
 
 production:
   <<: *default
