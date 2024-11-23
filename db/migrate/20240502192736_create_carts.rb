@@ -3,6 +3,8 @@ class CreateCarts < ActiveRecord::Migration[7.1]
     create_table :carts do |t|
       t.decimal :total_price, precision: 17, scale: 2
       t.datetime :discarded_at, index: true
+      t.datetime :abandoned_at, index: true
+      t.datetime :finished_at, index: true
 
       t.timestamps
     end

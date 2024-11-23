@@ -12,6 +12,7 @@ gem "tzinfo-data", platforms: %i[windows jruby]
 
 gem "redis", "~> 5.2"
 gem "sidekiq", "~> 7.2", ">= 7.2.4"
+gem "sidekiq-cron"
 gem "sidekiq-scheduler", "~> 5.0", ">= 5.0.3"
 
 gem "discard", "~> 1.4.0"
