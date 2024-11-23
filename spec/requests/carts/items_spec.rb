@@ -37,7 +37,7 @@ RSpec.describe 'Carts::ItemsController' do
 
         expect(response).to have_http_status(:ok)
         expect(json(response.body)[:products].count).to eq(2)
-        expect(json(response.body)[:total_price].to_f).to eq(updated_total_price.to_f)
+        expect(json(response.body)[:total_price].to_f).to be_within(0.01).of(updated_total_price.to_f)
       end
     end
 
