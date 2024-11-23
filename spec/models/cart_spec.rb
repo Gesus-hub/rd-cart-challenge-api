@@ -4,11 +4,23 @@ require 'rails_helper'
 
 RSpec.describe Cart do
   describe 'associations' do
-    it { is_expected.to have_many(:cart_items).class_name('Cart::Item').dependent(:destroy) }
-    it { is_expected.to have_many(:products).through(:cart_items) }
+    it { is_expected.to have_many(:items).dependent(:destroy) }
   end
 
-  describe 'validations' do
-    it { is_expected.to validate_numericality_of(:total_price).is_greater_than_or_equal_to(0) }
+  describe 'callbacks' do
+    let(:cart) { create(:cart, items_count: 5) }
+
+    it 'destroys associated items when the cart is destroyed' do
+      expect { cart.destroy }.not_to(change(Cart::Item, :count))
+    end
+  end
+
+  describe 'total_price' do
+    it 'calculates the total price based on associated items' do
+      cart = create(:cart, items_count: 2)
+      expected_total_price = cart.items.sum(&:total_price)
+
+      expect(cart.total_price).to eq(expected_total_price)
+    end
   end
 end

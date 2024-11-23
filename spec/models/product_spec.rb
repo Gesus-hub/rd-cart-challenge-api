@@ -3,11 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe Product do
-  describe 'associations' do
-    it { is_expected.to have_many(:cart_items).class_name('Cart::Item').dependent(:destroy) }
-    it { is_expected.to have_many(:carts).through(:cart_items) }
-  end
-
   describe 'validations' do
     subject { build(:product) }
 

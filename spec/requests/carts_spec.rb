@@ -2,22 +2,71 @@
 
 require 'rails_helper'
 
-# RSpec.describe "Carts" do
-#   pending "TODO: Escreva os testes de comportamento do controller de carrinho necessários"
-#   describe "POST /add_items" do
-#     let(:cart) { Cart.create }
-#     let(:product) { Product.create(name: "Test Product", price: 10.0) }
-#     let!(:cart_item) { CartItem.create(cart: cart, product: product, quantity: 1) }
+RSpec.describe 'Carts' do
+  describe 'GET /cart' do
+    context 'when the user is authenticated' do
+      let!(:cart) { create(:cart) }
 
-#     context 'when the product already is in the cart' do
-#       subject do
-#         post '/cart/add_items', params: { product_id: product.id, quantity: 1 }, as: :json
-#         post '/cart/add_items', params: { product_id: product.id, quantity: 1 }, as: :json
-#       end
+      it 'returns HTTP status :ok (200) and shows the current cart' do
+        get '/cart'
 
-#       it 'updates the quantity of the existing item in the cart' do
-#         expect { subject }.to change { cart_item.reload.quantity }.by(2)
-#       end
-#     end
-#   end
-# end
+        expected_body = {
+          id: cart.id,
+          products: cart.items.map do |cart_item|
+            {
+              id: cart_item.product.id,
+              name: cart_item.product.name,
+              quantity: cart_item.quantity,
+              unit_price: cart_item.unit_price.to_s,
+              total_price: cart_item.total_price.to_s
+            }
+          end,
+          total_price: cart.total_price.to_s
+        }
+
+        expect(response).to have_http_status(:ok)
+        expect(json(response.body)).to eq(expected_body)
+      end
+    end
+  end
+
+  describe 'PUT /cart' do
+    context 'when the user is authenticated' do
+      let!(:cart) { create(:cart) }
+
+      it 'returns HTTP status :ok (200) and updates the cart total price' do
+        put '/cart'
+
+        expected_body = {
+          id: cart.id,
+          products: cart.items.map do |cart_item|
+            {
+              id: cart_item.product.id,
+              name: cart_item.product.name,
+              quantity: cart_item.quantity,
+              unit_price: cart_item.unit_price.to_s,
+              total_price: cart_item.total_price.to_s
+            }
+          end,
+          total_price: cart.total_price.to_s
+        }
+
+        expect(response).to have_http_status(:ok)
+        expect(json(response.body)).to eq(expected_body)
+      end
+    end
+  end
+
+  describe 'DELETE /cart' do
+    context 'when the user is authenticated' do
+      let!(:cart) { create(:cart) }
+
+      it 'returns HTTP status :no_content (204) and deletes the cart' do
+        delete '/cart'
+
+        expect(response).to have_http_status(:no_content)
+        expect(cart.reload.discarded?).to be true
+      end
+    end
+  end
+end
