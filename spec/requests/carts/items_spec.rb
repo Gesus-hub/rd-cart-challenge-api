@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Carts::ItemsController' do
@@ -21,7 +23,7 @@ RSpec.describe 'Carts::ItemsController' do
         post '/cart/items', params: { item: { product_id: nil, quantity: 2 } }
 
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(json(response.body)[:errors]).to include(:"cart/item/creator_service" => ["Product not found"])
+        expect(json(response.body)[:errors]).to include("cart/item/creator_service": ["Product not found"])
       end
     end
   end

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'CartsController Routes' do
+RSpec.describe CartsController do
   describe 'routes' do
     it 'routes to #show' do
       expect(get: '/cart').to route_to('carts#show')

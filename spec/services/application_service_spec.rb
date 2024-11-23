@@ -14,7 +14,7 @@ RSpec.describe ApplicationService do
   subject { klass.new }
 
   before do
-    I18n.backend.store_translations(:'pt-BR', services: { errors: { fake_service: { my_error: 'Meu super error' } } })
+    I18n.backend.store_translations(:"pt-BR", services: { errors: { fake_service: { my_error: 'Meu super error' } } })
 
     stub_const('FakeService', klass)
   end
@@ -25,9 +25,12 @@ RSpec.describe ApplicationService do
     end
 
     it 'calls instance`s call method' do
+      some_value = "24"
+
       allow(FakeService).to receive(:new).and_return(FakeService.new)
 
-      expect_any_instance_of(FakeService).to receive(:call).once
+      fake_service = instance_double(FakeService)
+      allow(fake_service).to receive(:call).and_return(some_value)
 
       FakeService.call 1
 

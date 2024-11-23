@@ -9,6 +9,7 @@ class Cart
         super
       end
 
+      # rubocop:disable Metrics/AbcSize
       def call
         return response.add_error(:cart_not_present, message: "Cart not present") if cart.nil?
         return response.add_error(:product_not_found, message: "Product not found") if product.nil?
@@ -21,6 +22,7 @@ class Cart
 
         response
       end
+      # rubocop:enable Metrics/AbcSize
 
       private
 

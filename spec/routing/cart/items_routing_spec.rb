@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Carts::ItemsController Routes' do
+RSpec.describe Carts::ItemsController do
   describe 'routes' do
     it 'routes to #create' do
       expect(post: '/cart/items').to route_to('carts/items#create')

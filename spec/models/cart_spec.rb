@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Cart, type: :model do
+RSpec.describe Cart do
   describe 'associations' do
     it { is_expected.to have_many(:items).dependent(:destroy) }
   end
@@ -11,7 +11,7 @@ RSpec.describe Cart, type: :model do
     let(:cart) { create(:cart, items_count: 5) }
 
     it 'destroys associated items when the cart is destroyed' do
-      expect { cart.destroy }.to change { Cart::Item.count }.by(0)
+      expect { cart.destroy }.not_to(change(Cart::Item, :count))
     end
   end
 
