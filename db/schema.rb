@@ -29,9 +29,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_22_150652) do
   create_table "carts", force: :cascade do |t|
     t.decimal "total_price", precision: 17, scale: 2
     t.datetime "discarded_at"
+    t.datetime "abandoned_at"
+    t.datetime "finished_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["abandoned_at"], name: "index_carts_on_abandoned_at"
     t.index ["discarded_at"], name: "index_carts_on_discarded_at"
+    t.index ["finished_at"], name: "index_carts_on_finished_at"
   end
 
   create_table "products", force: :cascade do |t|
