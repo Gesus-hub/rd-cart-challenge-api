@@ -1,9 +1,14 @@
-:concurrency: 3
-:timeout: 60
 :verbose: true
+:concurrency: 3
+:max_retries: 3
+:logfile: ./log/sidekiq.log
+development:
+  :concurrency: 1
+production:
+  :concurrency: 4
 :queues:
-  - critical
-  - default
-  - mailers
-  - active_storage_analysis
-  - active_storage_purge
+  - [default, 2]
+  - [mailers, 2] # Default queue for ActionMailers
+  - [active_storage_analysis, 3]
+  - [active_storage_purge, 2]
+  - [high_priority, 4]
