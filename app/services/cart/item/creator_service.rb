@@ -15,7 +15,8 @@ class Cart
         return response.add_error(:product_not_found, message: "Product not found") if product.nil?
 
         if update_item
-          response.result = cart_response
+          response.result = item
+          update_cart
         else
           response.errors = item.errors.messages
         end
@@ -39,28 +40,18 @@ class Cart
       end
       # rubocop:enable Metrics/AbcSize
 
+      def update_cart
+        cart.abandoned_at = nil
+        cart.total_price = cart.items.sum(:total_price).to_f
+        cart.save
+      end
+
       def item
         @item ||= @cart.items.find_or_initialize_by(product: product)
       end
 
       def product
         @product ||= Product.find_by(id: item_params[:product_id])
-      end
-
-      def cart_response
-        {
-          id: cart.id,
-          products: cart.items.map do |item|
-            {
-              id: item.product.id,
-              name: item.product.name,
-              quantity: item.quantity,
-              unit_price: item.unit_price,
-              total_price: item.total_price
-            }
-          end,
-          total_price: cart.items.sum(&:total_price)
-        }
       end
     end
   end

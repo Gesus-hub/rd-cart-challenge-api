@@ -12,9 +12,9 @@ RSpec.describe 'Carts::ItemsController' do
         post '/cart/items', params: { item: { product_id: product.id, quantity: 2 } }
 
         expect(response).to have_http_status(:created)
-        expect(json(response.body)[:id]).to eq(Cart.last.id)
-        expect(json(response.body)[:products].first[:id]).to eq(product.id)
-        expect(json(response.body)[:products].first[:quantity]).to eq(2)
+        expect(json(response.body)[:data][:id]).to eq(Cart.last.id)
+        expect(json(response.body)[:data][:products].first[:id]).to eq(product.id)
+        expect(json(response.body)[:data][:products].first[:quantity]).to eq(2)
       end
     end
 
@@ -38,8 +38,8 @@ RSpec.describe 'Carts::ItemsController' do
         delete "/cart/items/#{product_to_delete.product_id}"
 
         expect(response).to have_http_status(:ok)
-        expect(json(response.body)[:products].count).to eq(2)
-        expect(json(response.body)[:total_price].to_f).to be_within(0.01).of(updated_total_price.to_f)
+        expect(json(response.body)[:data][:products].count).to eq(2)
+        expect(json(response.body)[:data][:total_price].to_f).to be_within(0.01).of(updated_total_price.to_f)
       end
     end
 

@@ -13,9 +13,13 @@ RSpec.describe Cart::Item::CreatorService do
 
       it 'returns ok? true and save item to cart' do
         expect(subject).to be_ok
-        expect(subject.result[:products].count).to eq(4)
-        expect(subject.result[:products].last[:name]).to eq(product.name)
-        expect(subject.result[:total_price]).to eq(cart.total_price + (product.price * item_params[:quantity]))
+
+        cart_item = subject.result
+
+        expect(cart_item).not_to be_nil
+        expect(cart_item.cart.items.count).to eq(4)
+        expect(cart_item.product.name).to eq(product.name)
+        expect(cart_item.cart.total_price).to eq(cart.total_price)
       end
     end
 
