@@ -11,17 +11,24 @@ RSpec.describe 'Carts' do
         get '/cart'
 
         expected_body = {
-          id: cart.id,
-          products: cart.items.map do |cart_item|
-            {
-              id: cart_item.product.id,
-              name: cart_item.product.name,
-              quantity: cart_item.quantity,
-              unit_price: cart_item.unit_price.to_s,
-              total_price: cart_item.total_price.to_s
-            }
-          end,
-          total_price: cart.total_price.to_s
+          data: {
+            id: cart.id,
+            products: cart.items.map do |cart_item|
+              {
+                id: cart_item.product.id,
+                name: cart_item.product.name,
+                quantity: cart_item.quantity,
+                unit_price: cart_item.unit_price.to_s,
+                total_price: cart_item.total_price.to_s
+              }
+            end,
+            total_price: cart.total_price.to_s,
+            discarded_at: cart.discarded_at.as_json,
+            abandoned_at: cart.abandoned_at.as_json,
+            finished_at: cart.finished_at.as_json,
+            created_at: cart.created_at.as_json,
+            updated_at: cart.updated_at.as_json
+          }
         }
 
         expect(response).to have_http_status(:ok)
@@ -38,17 +45,24 @@ RSpec.describe 'Carts' do
         put '/cart'
 
         expected_body = {
-          id: cart.id,
-          products: cart.items.map do |cart_item|
-            {
-              id: cart_item.product.id,
-              name: cart_item.product.name,
-              quantity: cart_item.quantity,
-              unit_price: cart_item.unit_price.to_s,
-              total_price: cart_item.total_price.to_s
-            }
-          end,
-          total_price: cart.total_price.to_s
+          data: {
+            id: cart.id,
+            products: cart.items.map do |cart_item|
+              {
+                id: cart_item.product.id,
+                name: cart_item.product.name,
+                quantity: cart_item.quantity,
+                unit_price: cart_item.unit_price.to_s,
+                total_price: cart_item.total_price.to_s
+              }
+            end,
+            total_price: cart.total_price.to_s,
+            discarded_at: cart.discarded_at.as_json,
+            abandoned_at: cart.abandoned_at.as_json,
+            finished_at: cart.finished_at.as_json,
+            created_at: cart.created_at.as_json,
+            updated_at: cart.updated_at.as_json
+          }
         }
 
         expect(response).to have_http_status(:ok)

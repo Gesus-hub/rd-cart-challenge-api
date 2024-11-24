@@ -33,11 +33,13 @@ RSpec.describe 'Products' do
       get "/products/#{product.id}"
 
       expected_body = {
-        id: product.id,
-        name: product.name,
-        price: product.price.as_json,
-        created_at: product.created_at.as_json,
-        updated_at: product.updated_at.as_json
+        data: {
+          id: product.id,
+          name: product.name,
+          price: product.price.as_json,
+          created_at: product.created_at.as_json,
+          updated_at: product.updated_at.as_json
+        }
       }
 
       expect(response).to have_http_status(:ok)
@@ -78,11 +80,13 @@ RSpec.describe 'Products' do
         product.reload
 
         expected_body = {
-          id: product.id,
-          name: product.name,
-          price: product.price.as_json,
-          created_at: product.created_at.as_json,
-          updated_at: product.updated_at.as_json
+          data: {
+            id: product.id,
+            name: product.name,
+            price: product.price.as_json,
+            created_at: product.created_at.as_json,
+            updated_at: product.updated_at.as_json
+          }
         }
 
         expect(response).to have_http_status(:ok)
