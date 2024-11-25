@@ -144,7 +144,7 @@
                           }
                         },
                         "total_price": {
-                          "type": "number"
+                          "type": "string"
                         }
                       }
                     }
@@ -167,6 +167,96 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/cart": {
+      "get": {
+        "summary": "Retrieves the current cart",
+        "tags": [
+          "Carts"
+        ],
+        "responses": {
+          "200": {
+            "description": "cart retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "products": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "quantity": {
+                                "type": "integer"
+                              },
+                              "unit_price": {
+                                "type": "string"
+                              },
+                              "total_price": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "total_price": {
+                          "type": "string"
+                        },
+                        "discarded_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "nullable": true
+                        },
+                        "abandoned_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "nullable": true
+                        },
+                        "finished_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "nullable": true
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "updated_at": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes the current cart",
+        "tags": [
+          "Carts"
+        ],
+        "responses": {
+          "204": {
+            "description": "cart deleted"
           }
         }
       }
