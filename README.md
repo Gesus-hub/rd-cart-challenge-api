@@ -44,12 +44,12 @@ cd rdstation-desafio-carrinho
 
 Instale as dependências:
 ```
-bundle install
+bin/bundle install
 ```
 
 Crie e execute as migrações:
 ```
-rails db:create db:migrate
+bin/rails db:create db:migrate
 ```
 Inicie o Redis:
 ```
@@ -58,7 +58,7 @@ redis-server
 
 Inicie o servidor Rails:
 ```
-rails server
+rails s
 ```
 Opcional - Execute o Sidekiq para tarefas em background:
 ```
@@ -67,7 +67,12 @@ bundle exec sidekiq
 
 Execute os testes:
 ```
-bundle exec rspec
+bin/rspec
+```
+
+Execute rubocop:
+```
+bin/rubocop
 ```
 
 Rodando o Projeto (Com Docker)
