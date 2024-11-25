@@ -27,6 +27,7 @@ group :development, :test do
   gem "pry-byebug", "~> 3.10"
   gem "pry-rails", "~> 0.3.11"
   gem "rspec-rails", "~> 6.1.0"
+  gem "rswag-specs", "~> 2.16.0"
 end
 
 group :test do
