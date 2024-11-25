@@ -5,6 +5,172 @@
     "version": "v1"
   },
   "paths": {
+    "/cart/items": {
+      "post": {
+        "summary": "Adds an item to the cart",
+        "tags": [
+          "Cart Items"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "item added to the cart",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "products": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "quantity": {
+                                "type": "integer"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "unprocessable entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "item": {
+                    "type": "object",
+                    "properties": {
+                      "product_id": {
+                        "type": "integer"
+                      },
+                      "quantity": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "product_id",
+                      "quantity"
+                    ]
+                  }
+                },
+                "required": [
+                  "item"
+                ]
+              }
+            }
+          },
+          "required": true
+        }
+      }
+    },
+    "/cart/items/{id}": {
+      "delete": {
+        "summary": "Removes an item from the cart",
+        "tags": [
+          "Cart Items"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the product in the cart",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "item removed from the cart",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "products": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "quantity": {
+                                "type": "integer"
+                              }
+                            }
+                          }
+                        },
+                        "total_price": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "item not found in cart",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/products": {
       "get": {
         "summary": "Retrieves all products",
