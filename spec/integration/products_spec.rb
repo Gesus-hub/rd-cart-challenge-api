@@ -10,7 +10,7 @@ RSpec.describe 'Products API', openapi_spec: 'api/swagger.json' do
       produces 'application/json'
 
       response '200', 'products found' do
-        let!(:products) { create_list(:product, 3) }
+        let(:products) { create_list(:product, 3) }
 
         run_test!
       end
@@ -39,7 +39,6 @@ RSpec.describe 'Products API', openapi_spec: 'api/swagger.json' do
       end
     end
   end
-
 
   path '/products' do
     post 'Creates a new product' do
@@ -72,7 +71,7 @@ RSpec.describe 'Products API', openapi_spec: 'api/swagger.json' do
         properties: {
           name: { type: :string, description: 'The name of the product' },
           price: { type: :number, description: 'The price of the product' }
-        },
+        }
       }
 
       response '200', 'product updated' do
@@ -84,5 +83,4 @@ RSpec.describe 'Products API', openapi_spec: 'api/swagger.json' do
       end
     end
   end
-
 end
