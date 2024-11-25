@@ -15,6 +15,9 @@ gem "sidekiq", "~> 7.2", ">= 7.2.4"
 gem "sidekiq-cron"
 gem "sidekiq-scheduler", "~> 5.0", ">= 5.0.3"
 
+gem "rswag-api",   "~> 2.15.0"
+gem "rswag-ui",    "~> 2.15.0"
+
 gem "discard", "~> 1.4.0"
 gem "guard"
 gem "guard-livereload", require: false
